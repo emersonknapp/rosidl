@@ -24,6 +24,7 @@ from rosidl_parser.definition import OCTET_TYPE
 from rosidl_parser.definition import UNSIGNED_INTEGER_TYPES
 
 message_typename = '::'.join(message.structure.namespaced_type.namespaced_name())
+message_name = message.structure.namespaced_type.name
 
 # Common Windows macros that may interfere with user defined constants
 msvc_common_macros = ('DELETE', 'ERROR', 'NO_ERROR')
@@ -104,6 +105,9 @@ struct @(message.structure.namespaced_type.name)_
 
   // Type Version Hash for interface
   constexpr static const rosidl_type_hash_t TYPE_VERSION_HASH = @(type_hash_to_c_definition(type_hash['message']));
+
+  static const rosidl_runtime_cpp::type_description::IndividualTypeDescription INDIVIDUAL_TYPE_DESCRIPTION;
+  static const rosidl_runtime_cpp::type_description::TypeDescription TYPE_DESCRIPTION;
 
 @{
 # The creation of the constructors for messages is a bit complicated.  The goal
@@ -355,6 +359,11 @@ u@
   {
     return !this->operator==(other);
   }
+
+  // descriptions
+  constexpr static const @(type_hash_to_c_definition("TYPE_VERSION_HASH", type_hash['message'], indent=2))@
+
+  static const rosidl_runtime_cpp::type_description::TypeDescription_<ContainerAllocator> & get_type_description();
 };  // struct @(message.structure.namespaced_type.name)_
 
 // alias to use template instance with default allocator
@@ -394,6 +403,7 @@ constexpr @(MSG_TYPE_TO_CPP[c.type.typename]) @(message.structure.namespaced_typ
 #endif
 @[ end if]@
 @[end for]@
+
 @
 @[for ns in reversed(message.structure.namespaced_type.namespaces)]@
 

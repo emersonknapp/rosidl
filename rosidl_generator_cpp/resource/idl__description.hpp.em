@@ -1,9 +1,9 @@
-// generated from rosidl_generator_cpp/resource/idl__struct.hpp.em
+// generated from rosidl_generator_cpp/resource/idl__description.hpp.em
 // with input from @(package_name):@(interface_path)
 // generated code does not contain a copyright notice
 @
 @#######################################################################
-@# EmPy template for generating <idl>__struct.hpp files
+@# EmPy template for generating <idl>__description.hpp files
 @#
 @# Context:
 @#  - package_name (string)
@@ -14,10 +14,9 @@
 from rosidl_pycommon import convert_camel_case_to_lower_case_underscore
 include_parts = [package_name] + list(interface_path.parents[0].parts) + [
     'detail', convert_camel_case_to_lower_case_underscore(interface_path.stem)]
+include_base = '/'.join(include_parts)
 header_guard_variable = '__'.join([x.upper() for x in include_parts]) + \
-    '__STRUCT_HPP_'
-
-include_directives = set()
+    '__DESCRIPTION_HPP_'
 type_hash = type_description_info['hashes']
 type_description = type_description_info['type_description']
 }@
@@ -25,15 +24,7 @@ type_description = type_description_info['type_description']
 #ifndef @(header_guard_variable)
 #define @(header_guard_variable)
 
-#include <algorithm>
-#include <array>
-#include <memory>
-#include <string>
-#include <vector>
-
-#include "rosidl_runtime_c/type_hash.h"
-#include "rosidl_runtime_cpp/bounded_vector.hpp"
-#include "rosidl_runtime_cpp/message_initialization.hpp"
+#include "@(include_base)__struct.hpp"
 #include "rosidl_runtime_cpp/type_description/type_description__struct.hpp"
 
 @#######################################################################
@@ -46,9 +37,9 @@ toplevel_template = True
 @[for message in content.get_elements_of_type(Message)]@
 @{
 TEMPLATE(
-    'msg__struct.hpp.em',
+    'msg__description.hpp.em',
     package_name=package_name, interface_path=interface_path,
-    message=message, include_directives=include_directives,
+    message=message,
     type_hash=type_hash, type_description=type_description)
 }@
 
@@ -62,13 +53,13 @@ from rosidl_parser.definition import Service
 toplevel_template = False
 }@
 @[for service in content.get_elements_of_type(Service)]@
-@{
-TEMPLATE(
-    'srv__struct.hpp.em',
-    package_name=package_name, interface_path=interface_path,
-    service=service, include_directives=include_directives,
-    type_hash=type_hash, type_description=type_description)
-}@
+@#@{
+@#TEMPLATE(
+@#    'srv__description.hpp.em',
+@#    package_name=package_name, interface_path=interface_path,
+@#    service=service,
+@#    type_hash=type_hash, type_description=type_description)
+@#}@
 
 @[end for]@
 @
@@ -80,13 +71,15 @@ from rosidl_parser.definition import Action
 toplevel_template = False
 }@
 @[for action in content.get_elements_of_type(Action)]@
-@{
-TEMPLATE(
-    'action__struct.hpp.em',
-    package_name=package_name, interface_path=interface_path,
-    action=action, include_directives=include_directives,
-    type_hash=type_hash, type_description=type_description)
-}@
+@#@{
+@#TEMPLATE(
+@#    'action__description.hpp.em',
+@#    package_name=package_name, interface_path=interface_path,
+@#    action=action,
+@#    type_hash=type_hash, type_description=type_description)
+@#}@
 
 @[end for]@
+
+
 #endif  // @(header_guard_variable)

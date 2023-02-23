@@ -23,6 +23,8 @@ from rosidl_generator_c import idl_structure_type_to_c_typename
 from rosidl_generator_c import interface_path_to_string
 from rosidl_generator_c import type_hash_to_c_definition
 from rosidl_generator_c import value_to_c
+
+message_typename = idl_structure_type_to_c_typename(message.structure.namespaced_type)
 }@
 @#<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 @# Collect necessary include directives for all members
@@ -196,3 +198,12 @@ typedef struct @(idl_structure_type_sequence_to_c_typename(message.structure.nam
   /// The number of allocated items in data
   size_t capacity;
 } @(idl_structure_type_sequence_to_c_typename(message.structure.namespaced_type));
+@#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+@#<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+/// Type Version Hash for interface
+static const @(type_hash_to_c_definition(message_typename + "__TYPE_VERSION_HASH", type_hash['message']))@
+
+/// Type Description for interface, defined in compilation unit
+extern const rosidl_runtime_c__type_description__TypeDescription @(message_typename)__TYPE_DESCRIPTION;
+@#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

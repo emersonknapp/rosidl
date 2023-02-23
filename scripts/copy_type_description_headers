@@ -1,0 +1,41 @@
+#!/bin/bash
+set -euxo pipefail
+
+# TODO(ek) needs documentation of usage
+
+
+# C structs
+rm src/ros2/rosidl/rosidl_runtime_c/include/rosidl_runtime_c/type_description/*.h
+cp build/type_description_interfaces/rosidl_generator_c/type_description_interfaces/msg/detail/*__struct.h src/ros2/rosidl/rosidl_runtime_c/include/rosidl_runtime_c/type_description/
+
+pushd src/ros2/rosidl/rosidl_runtime_c/include/rosidl_runtime_c/type_description
+# include guards
+sed -i -e 's/TYPE_DESCRIPTION_INTERFACES__MSG__DETAIL__/ROSIDL_RUNTIME_C__TYPE_DESCRIPTION__/g' *.h
+# namespace prefixs
+sed -i -e 's/type_description_interfaces__msg__/rosidl_runtime_c__type_description__/g' *.h
+# includes
+sed -i -e 's/type_description_interfaces\/msg\/detail/rosidl_runtime_c\/type_description/g' *.h
+# type description declaration (avoiding circular dependency, these will not be self-describing)
+sed -i -e 's/extern const rosidl_runtime_c__type_description__TypeDescription/\/\/ extern const rosidl_runtime_c__type_description__TypeDescription/' *.h
+popd
+
+# C++ structs (traits are nice for yaml converters for runtime use)
+rm src/ros2/rosidl/rosidl_runtime_cpp/include/rosidl_runtime_cpp/type_description/*.hpp
+cp build/type_description_interfaces/rosidl_generator_cpp/type_description_interfaces/msg/detail/*__struct.hpp src/ros2/rosidl/rosidl_runtime_cpp/include/rosidl_runtime_cpp/type_description/
+
+pushd src/ros2/rosidl/rosidl_runtime_cpp/include/rosidl_runtime_cpp/type_description
+# include guards
+sed -i -e 's/TYPE_DESCRIPTION_INTERFACES__MSG__DETAIL__/ROSIDL_RUNTIME_CPP__TYPE_DESCRIPTION__/g' *.hpp
+# pkg namespace
+sed -i -e 's/namespace type_description_interfaces/namespace rosidl_runtime_cpp/g' *.hpp
+# msg namespace
+sed -i -e 's/namespace msg/namespace type_description/g' *.hpp
+# includes
+sed -i -e 's/type_description_interfaces\/msg\/detail/rosidl_runtime_cpp\/type_description/g' *.hpp
+# type references
+sed -i -e 's/type_description_interfaces::msg::/rosidl_runtime_cpp::type_description::/g' *.hpp
+# macros
+sed -i -e 's/type_description_interfaces__msg__/rosidl_runtime_cpp__type_description__/g' *.hpp
+# type description declaration (avoiding circular dependency, these will not be self-describing)
+sed -i -e 's/static const rosidl_runtime_cpp::type_description::TypeDescription/\/\/ static const rosidl_runtime_cpp::type_description::TypeDescription/' *.hpp
+popd

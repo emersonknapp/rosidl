@@ -20,6 +20,7 @@ header_guard_variable = '__'.join([x.upper() for x in include_parts]) + \
     '__STRUCT_H_'
 
 include_directives = set()
+type_hash = type_description_info['hashes']
 }@
 
 #ifndef @(header_guard_variable)
@@ -35,6 +36,7 @@ extern "C"
 #include <stdint.h>
 
 #include "rosidl_runtime_c/type_hash.h"
+#include "rosidl_runtime_c/type_description/type_description__struct.h"
 
 @#######################################################################
 @# Handle message

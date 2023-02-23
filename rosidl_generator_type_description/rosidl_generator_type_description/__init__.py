@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from copy import deepcopy
 import hashlib
 import json
 from pathlib import Path
@@ -316,7 +317,9 @@ def serialize_field(member: definition.Member) -> dict:
     return {
         'name': member.name,
         'type': serialize_field_type(member.type),
-        # skipping default_value
+        'default_value':
+            str(member.get_annotation_value('default')['value'])
+            if member.has_annotation('default') else ''
     }
 
 
@@ -446,6 +449,7 @@ class InterfaceHasher:
         hashed_type_description = {
             'hashes': self._calculate_hash_tree(),
             'type_description_msg': self.full_type_description,
+            'subinterfaces': self._all_interface_references(),
         }
 
         json_path = output_dir / self.rel_path.with_suffix('.json')
@@ -453,9 +457,28 @@ class InterfaceHasher:
             json_file.write(json.dumps(hashed_type_description, indent=2))
         return generated_files + [json_path]
 
+    def _all_interface_references(self) -> dict:
+        results = {
+            self.individual_type_description['type_name']: [
+                x['type_name']
+                for x in self.full_type_description['referenced_type_descriptions']
+            ]
+        }
+        if self.subinterfaces:
+            for hasher in self.subinterfaces.values():
+                results.update(hasher._all_interface_references())
+        return results
+
     def _calculate_hash_tree(self) -> dict:
+        hashable_dict = deepcopy(self.full_type_description)
+        for field in hashable_dict['type_description']['fields']:
+            del field['default_value']
+        for referenced_td in hashable_dict['referenced_type_descriptions']:
+            for field in referenced_td['fields']:
+                del field['default_value']
+
         hashable_repr = json.dumps(
-            self.full_type_description,
+            hashable_dict,
             skipkeys=False,
             ensure_ascii=True,
             check_circular=True,
