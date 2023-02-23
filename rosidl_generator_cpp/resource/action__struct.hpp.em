@@ -20,7 +20,7 @@ TEMPLATE(
     'msg__struct.hpp.em',
     package_name=package_name, interface_path=interface_path,
     message=action.goal, include_directives=include_directives,
-    type_hash=type_hash['goal'])
+    type_hash=type_hash['goal'], type_description=type_description)
 }@
 
 @{
@@ -28,7 +28,7 @@ TEMPLATE(
     'msg__struct.hpp.em',
     package_name=package_name, interface_path=interface_path,
     message=action.result, include_directives=include_directives,
-    type_hash=type_hash['result'])
+    type_hash=type_hash['result'], type_description=type_description)
 }@
 
 @{
@@ -36,7 +36,7 @@ TEMPLATE(
     'msg__struct.hpp.em',
     package_name=package_name, interface_path=interface_path,
     message=action.feedback, include_directives=include_directives,
-    type_hash=type_hash['feedback'])
+    type_hash=type_hash['feedback'], type_description=type_description)
 }@
 
 @{
@@ -44,7 +44,7 @@ TEMPLATE(
     'srv__struct.hpp.em',
     package_name=package_name, interface_path=interface_path,
     service=action.send_goal_service, include_directives=include_directives,
-    type_hash=type_hash['send_goal_service'])
+    type_hash=type_hash['send_goal_service'], type_description=type_description)
 }@
 
 @{
@@ -52,7 +52,7 @@ TEMPLATE(
     'srv__struct.hpp.em',
     package_name=package_name, interface_path=interface_path,
     service=action.get_result_service, include_directives=include_directives,
-    type_hash=type_hash['get_result_service'])
+    type_hash=type_hash['get_result_service'], type_description=type_description)
 }@
 
 @{
@@ -60,7 +60,7 @@ TEMPLATE(
     'msg__struct.hpp.em',
     package_name=package_name, interface_path=interface_path,
     message=action.feedback_message, include_directives=include_directives,
-    type_hash=type_hash['feedback_message'])
+    type_hash=type_hash['feedback_message'], type_description=type_description)
 }@
 
 @[for header_file in action_includes]@
@@ -81,6 +81,8 @@ namespace @(ns)
 struct @(action.namespaced_type.name)
 {
   static constexpr const rosidl_type_hash_t @(TYPE_HASH_VAR) = @(type_hash_to_c_definition(type_hash['action'], indent=4));
+
+  static const rosidl_runtime_cpp::type_description::TypeDescription & get_type_description();
 
   /// The goal message defined in the action definition.
   using Goal = @(action_name)@(ACTION_GOAL_SUFFIX);

@@ -25,6 +25,7 @@ from rosidl_parser.definition import OCTET_TYPE
 from rosidl_parser.definition import UNSIGNED_INTEGER_TYPES
 
 message_typename = '::'.join(message.structure.namespaced_type.namespaced_name())
+message_name = message.structure.namespaced_type.name
 
 # Common Windows macros that may interfere with user defined constants
 msvc_common_macros = ('DELETE', 'ERROR', 'NO_ERROR')
@@ -104,6 +105,8 @@ struct @(message.structure.namespaced_type.name)_
   using Type = @(message.structure.namespaced_type.name)_<ContainerAllocator>;
 
   constexpr static const rosidl_type_hash_t @(TYPE_HASH_VAR) = @(type_hash_to_c_definition(type_hash['message'], indent=4));
+
+  static const rosidl_runtime_cpp::type_description::TypeDescription & get_type_description();
 
 @{
 # The creation of the constructors for messages is a bit complicated.  The goal

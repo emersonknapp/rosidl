@@ -11,7 +11,7 @@ TEMPLATE(
     'msg__struct.hpp.em',
     package_name=package_name, interface_path=interface_path,
     message=service.request_message, include_directives=include_directives,
-    type_hash=type_hash['request_message'])
+    type_hash=type_hash['request_message'], type_description=type_description)
 }@
 
 @{
@@ -19,7 +19,7 @@ TEMPLATE(
     'msg__struct.hpp.em',
     package_name=package_name, interface_path=interface_path,
     message=service.response_message, include_directives=include_directives,
-    type_hash=type_hash['response_message'])
+    type_hash=type_hash['response_message'], type_description=type_description)
 }@
 
 @{
@@ -27,7 +27,7 @@ TEMPLATE(
     'msg__struct.hpp.em',
     package_name=package_name, interface_path=interface_path,
     message=service.event_message, include_directives=include_directives,
-    type_hash=type_hash['event_message'])
+    type_hash=type_hash['event_message'], type_description=type_description)
 }@
 
 @[for ns in service.namespaced_type.namespaces]@
@@ -42,6 +42,7 @@ struct @(service.namespaced_type.name)
 service_typename = '::'.join(service.namespaced_type.namespaced_name())
 }@
   static constexpr const rosidl_type_hash_t @(TYPE_HASH_VAR) = @(type_hash_to_c_definition(type_hash['service'], indent=4));
+  static const rosidl_runtime_cpp::type_description::TypeDescription & get_type_description();
 
   using Request = @(service_typename)@(SERVICE_REQUEST_MESSAGE_SUFFIX);
   using Response = @(service_typename)@(SERVICE_RESPONSE_MESSAGE_SUFFIX);

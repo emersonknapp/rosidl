@@ -15,6 +15,8 @@ find_package(ament_cmake_ros REQUIRED)
 find_package(rcutils REQUIRED)
 find_package(rosidl_typesupport_interface REQUIRED)
 
+file(GLOB type_description_includes "include/rosidl_runtime_c/type_description/*.h")
+file(GLOB type_description_sources "src/type_description/*.c")
 add_library(${PROJECT_NAME}
   "src/message_type_support.c"
   "src/primitives_sequence_functions.c"
@@ -23,6 +25,7 @@ add_library(${PROJECT_NAME}
   "src/string_functions.c"
   "src/type_hash.c"
   "src/u16string_functions.c"
+  ${type_description_sources}
 )
 target_include_directories(${PROJECT_NAME} PUBLIC
   "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
@@ -60,6 +63,9 @@ if(BUILD_TESTING)
   # Give cppcheck hints about macro definitions coming from outside this package
   get_target_property(ament_cmake_cppcheck_ADDITIONAL_INCLUDE_DIRS performance_test_fixture::performance_test_fixture
     INTERFACE_INCLUDE_DIRECTORIES)
+
+  # TODO(ek) lint copied sources
+  set(AMENT_LINT_AUTO_FILE_EXCLUDE ${type_description_includes} ${type_description_sources})
   ament_lint_auto_find_test_dependencies()
 
   # For gtest

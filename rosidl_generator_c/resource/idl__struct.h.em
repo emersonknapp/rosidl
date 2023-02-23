@@ -21,6 +21,7 @@ header_guard_variable = '__'.join([x.upper() for x in include_parts]) + \
     '__STRUCT_H_'
 
 include_directives = set()
+type_hash = type_description_info['hashes']
 }@
 
 #ifndef @(header_guard_variable)
@@ -36,6 +37,7 @@ extern "C"
 #include <stdint.h>
 
 #include "rosidl_runtime_c/type_hash.h"
+#include "rosidl_runtime_c/type_description/type_description__struct.h"
 
 @#######################################################################
 @# Handle message
@@ -62,6 +64,8 @@ from rosidl_parser.definition import Service
 @[for service in content.get_elements_of_type(Service)]@
 
 static const rosidl_type_hash_t @(idl_structure_type_to_c_typename(service.namespaced_type))__@(TYPE_HASH_VAR) = @(type_hash_to_c_definition(type_hash['service']));
+
+extern const rosidl_runtime_c__type_description__TypeDescription @(srv_var)__TYPE_DESCRIPTION;
 
 @{
 TEMPLATE(
@@ -98,6 +102,8 @@ from rosidl_parser.definition import Action
 @[for action in content.get_elements_of_type(Action)]@
 
 static const rosidl_type_hash_t @(idl_structure_type_to_c_typename(action.namespaced_type))__@(TYPE_HASH_VAR) = @(type_hash_to_c_definition(type_hash['action']));
+
+extern const rosidl_runtime_c__type_description__TypeDescription @(action_var)__TYPE_DESCRIPTION;
 
 @{
 TEMPLATE(

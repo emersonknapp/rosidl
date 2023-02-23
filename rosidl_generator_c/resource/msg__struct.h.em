@@ -67,6 +67,9 @@ for member in message.structure.members:
 // Type Hash for interface
 static const rosidl_type_hash_t @(idl_structure_type_to_c_typename(message.structure.namespaced_type))__@(TYPE_HASH_VAR) = @(type_hash_to_c_definition(type_hash['message']));
 
+/// Type Description for interface, defined in compilation unit
+extern const rosidl_runtime_c__type_description__TypeDescription @(message_typename)__TYPE_DESCRIPTION;
+
 // Constants defined in the message
 @[for constant in message.constants]@
 
@@ -194,3 +197,4 @@ typedef struct @(idl_structure_type_sequence_to_c_typename(message.structure.nam
   /// The number of allocated items in data
   size_t capacity;
 } @(idl_structure_type_sequence_to_c_typename(message.structure.namespaced_type));
+@#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

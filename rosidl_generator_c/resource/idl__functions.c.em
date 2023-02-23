@@ -51,7 +51,6 @@ from rosidl_parser.definition import Service
 }@
 @[for service in content.get_elements_of_type(Service)]@
 @{
-
 TEMPLATE(
     'msg__functions.c.em',
     package_name=package_name, interface_path=interface_path,
