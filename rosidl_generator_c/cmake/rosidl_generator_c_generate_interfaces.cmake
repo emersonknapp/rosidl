@@ -86,7 +86,7 @@ rosidl_write_generator_arguments(
   TYPE_HASH_TUPLES "${${rosidl_generate_interfaces_TARGET}__HASH_TUPLES}"
 )
 file(READ ${generator_arguments_file} GENERATOR_ARGS_CONTENTS)
-message(FATAL_ERROR "Gen args:\n${GENERATOR_ARGS_CONTENTS}")
+message(WARNING "Gen args:\n${GENERATOR_ARGS_CONTENTS}")
 
 find_package(Python3 REQUIRED COMPONENTS Interpreter)
 
