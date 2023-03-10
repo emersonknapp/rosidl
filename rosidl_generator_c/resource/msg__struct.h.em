@@ -183,13 +183,15 @@ typedef struct @(idl_structure_type_to_c_typename(message.structure.namespaced_t
 @{
 from rosidl_generator_type_description import parse_rihs_string
 hash_version, hash_value = parse_rihs_string(type_hash['message'])
+hash_var = idl_structure_type_to_c_typename(message.structure.namespaced_type) + '__TYPE_VERSION_HASH'
 }@
-#define @(idl_structure_type_to_c_typename(message.structure.namespaced_type))__TYPE_VERSION_HASH \
+#define @(hash_var)__INIT \
 { 1, { \
 @[for i in range( 0,  8)]0x@(hash_value[i * 2])@(hash_value[i * 2 + 1]), @[end for]@ \
 @[for i in range( 8, 16)]0x@(hash_value[i * 2])@(hash_value[i * 2 + 1]), @[end for]@ \
 @[for i in range(16, 24)]0x@(hash_value[i * 2])@(hash_value[i * 2 + 1]), @[end for]@ \
 @[for i in range(24, 32)]0x@(hash_value[i * 2])@(hash_value[i * 2 + 1]), @[end for]@ }}
+static const rosidl_type_hash_t @(hash_var) = @(hash_var)__INIT;
 @#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 @#<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
