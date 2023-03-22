@@ -35,15 +35,12 @@ struct FieldType_
 {
   using Type = FieldType_<ContainerAllocator>;
 
-  // Description of interface
-  constexpr static const rosidl_type_hash_t TYPE_VERSION_HASH = {1, {
-      0x0e, 0x87, 0xb0, 0x27, 0xae, 0xbc, 0x38, 0x33,
-      0x7e, 0x90, 0x6e, 0x75, 0xb0, 0xe6, 0x4a, 0x94,
-      0x66, 0x10, 0x02, 0xd0, 0x5e, 0xcd, 0x8d, 0x99,
-      0xd9, 0xfb, 0x3a, 0x30, 0xcd, 0x95, 0x12, 0x95,
+  constexpr static const rosidl_type_hash_t TYPE_HASH = {1, {
+      0xa7, 0x0b, 0x6d, 0xd9, 0x19, 0x64, 0x5a, 0x03,
+      0xa3, 0x58, 0x6f, 0x7f, 0x82, 0x1d, 0xef, 0xbc,
+      0x88, 0x6e, 0xa3, 0xe5, 0x31, 0xa1, 0xd9, 0x5c,
+      0xc0, 0xf3, 0x80, 0xa3, 0x97, 0x3c, 0xca, 0xa6,
     }};
-
-  // static const rosidl_runtime_cpp::type_description::TypeDescription_<ContainerAllocator> & get_type_description();
 
   explicit FieldType_(rosidl_runtime_cpp::MessageInitialization _init = rosidl_runtime_cpp::MessageInitialization::ALL)
   {
@@ -373,7 +370,7 @@ using FieldType =
   rosidl_runtime_cpp::type_description::FieldType_<std::allocator<void>>;
 
 template<class ContainerAllocator>
-constexpr const rosidl_type_hash_t FieldType_<ContainerAllocator>::TYPE_VERSION_HASH;
+constexpr const rosidl_type_hash_t FieldType_<ContainerAllocator>::TYPE_HASH;
 
 // constant definitions
 template<typename ContainerAllocator>

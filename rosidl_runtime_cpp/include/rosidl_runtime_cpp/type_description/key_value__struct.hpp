@@ -35,15 +35,12 @@ struct KeyValue_
 {
   using Type = KeyValue_<ContainerAllocator>;
 
-  // Description of interface
-  constexpr static const rosidl_type_hash_t TYPE_VERSION_HASH = {1, {
-      0x96, 0xeb, 0xe1, 0xdc, 0xdd, 0xe6, 0x55, 0x04,
-      0x93, 0xad, 0xeb, 0x5f, 0xa6, 0x97, 0x73, 0x36,
-      0x00, 0xb9, 0x68, 0x79, 0x2c, 0x20, 0xac, 0x18,
-      0xdb, 0x60, 0x05, 0x6e, 0xb6, 0x46, 0xee, 0xad,
+  constexpr static const rosidl_type_hash_t TYPE_HASH = {1, {
+      0x27, 0x4f, 0xe5, 0x6b, 0xf1, 0x4f, 0x33, 0xc7,
+      0x51, 0x2e, 0x34, 0xc6, 0x46, 0xa3, 0x75, 0x79,
+      0xee, 0x36, 0x77, 0x9f, 0x74, 0x5f, 0x04, 0x9a,
+      0x97, 0x60, 0x76, 0x3e, 0x81, 0x7f, 0x0c, 0x42,
     }};
-
-  // static const rosidl_runtime_cpp::type_description::TypeDescription_<ContainerAllocator> & get_type_description();
 
   explicit KeyValue_(rosidl_runtime_cpp::MessageInitialization _init = rosidl_runtime_cpp::MessageInitialization::ALL)
   {
@@ -150,7 +147,7 @@ using KeyValue =
   rosidl_runtime_cpp::type_description::KeyValue_<std::allocator<void>>;
 
 template<class ContainerAllocator>
-constexpr const rosidl_type_hash_t KeyValue_<ContainerAllocator>::TYPE_VERSION_HASH;
+constexpr const rosidl_type_hash_t KeyValue_<ContainerAllocator>::TYPE_HASH;
 
 // constant definitions
 
