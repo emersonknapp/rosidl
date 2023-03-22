@@ -82,8 +82,6 @@ struct @(action.namespaced_type.name)
 {
   static constexpr const rosidl_type_hash_t @(TYPE_HASH_VAR) = @(type_hash_to_c_definition(type_hash['action'], indent=4));
 
-  static const rosidl_runtime_cpp::type_description::TypeDescription & get_type_description();
-
   /// The goal message defined in the action definition.
   using Goal = @(action_name)@(ACTION_GOAL_SUFFIX);
   /// The result message defined in the action definition.

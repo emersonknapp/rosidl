@@ -62,8 +62,9 @@ TEMPLATE(
 from rosidl_parser.definition import Service
 }@
 @[for service in content.get_elements_of_type(Service)]@
+@{ srv_var = idl_structure_type_to_c_typename(service.namespaced_type) }@
 
-static const rosidl_type_hash_t @(idl_structure_type_to_c_typename(service.namespaced_type))__@(TYPE_HASH_VAR) = @(type_hash_to_c_definition(type_hash['service']));
+static const rosidl_type_hash_t @(srv_var)__@(TYPE_HASH_VAR) = @(type_hash_to_c_definition(type_hash['service']));
 
 extern const rosidl_runtime_c__type_description__TypeDescription @(srv_var)__TYPE_DESCRIPTION;
 
@@ -100,8 +101,9 @@ TEMPLATE(
 from rosidl_parser.definition import Action
 }@
 @[for action in content.get_elements_of_type(Action)]@
+@{ action_var = idl_structure_type_to_c_typename(action.namespaced_type) }@
 
-static const rosidl_type_hash_t @(idl_structure_type_to_c_typename(action.namespaced_type))__@(TYPE_HASH_VAR) = @(type_hash_to_c_definition(type_hash['action']));
+static const rosidl_type_hash_t @(action_var)__@(TYPE_HASH_VAR) = @(type_hash_to_c_definition(type_hash['action']));
 
 extern const rosidl_runtime_c__type_description__TypeDescription @(action_var)__TYPE_DESCRIPTION;
 

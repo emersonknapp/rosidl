@@ -42,7 +42,6 @@ struct @(service.namespaced_type.name)
 service_typename = '::'.join(service.namespaced_type.namespaced_name())
 }@
   static constexpr const rosidl_type_hash_t @(TYPE_HASH_VAR) = @(type_hash_to_c_definition(type_hash['service'], indent=4));
-  static const rosidl_runtime_cpp::type_description::TypeDescription & get_type_description();
 
   using Request = @(service_typename)@(SERVICE_REQUEST_MESSAGE_SUFFIX);
   using Response = @(service_typename)@(SERVICE_RESPONSE_MESSAGE_SUFFIX);

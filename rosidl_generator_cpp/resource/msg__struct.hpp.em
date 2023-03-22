@@ -106,8 +106,6 @@ struct @(message.structure.namespaced_type.name)_
 
   constexpr static const rosidl_type_hash_t @(TYPE_HASH_VAR) = @(type_hash_to_c_definition(type_hash['message'], indent=4));
 
-  static const rosidl_runtime_cpp::type_description::TypeDescription & get_type_description();
-
 @{
 # The creation of the constructors for messages is a bit complicated.  The goal
 # is to have a constructor where the user can control how the fields of the
