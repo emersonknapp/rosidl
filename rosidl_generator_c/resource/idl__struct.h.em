@@ -36,8 +36,8 @@ extern "C"
 #include <stddef.h>
 #include <stdint.h>
 
-#include "rosidl_runtime_c/type_hash.h"
 #include "rosidl_runtime_c/type_description/type_description__struct.h"
+#include "rosidl_runtime_c/type_hash.h"
 
 @#######################################################################
 @# Handle message

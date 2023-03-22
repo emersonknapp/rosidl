@@ -10,7 +10,6 @@ from rosidl_parser.definition import BasicType
 from rosidl_parser.definition import AbstractGenericString
 from rosidl_parser.definition import NamespacedType
 from rosidl_generator_c import basetype_to_c
-from rosidl_generator_c import escape_string
 from rosidl_generator_c import idl_structure_type_sequence_to_c_typename
 from rosidl_generator_c import idl_structure_type_to_c_include_prefix
 from rosidl_generator_c import idl_structure_type_to_c_typename

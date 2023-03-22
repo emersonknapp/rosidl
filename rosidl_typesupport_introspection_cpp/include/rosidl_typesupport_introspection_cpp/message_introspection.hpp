@@ -22,7 +22,6 @@
 #include "rosidl_runtime_c/type_hash.h"
 
 #include "rosidl_runtime_cpp/message_initialization.hpp"
-#include "rosidl_runtime_cpp/type_description/type_description__struct.hpp"
 
 #include "rosidl_typesupport_introspection_cpp/visibility_control.h"
 

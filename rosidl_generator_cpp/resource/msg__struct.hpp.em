@@ -25,7 +25,6 @@ from rosidl_parser.definition import OCTET_TYPE
 from rosidl_parser.definition import UNSIGNED_INTEGER_TYPES
 
 message_typename = '::'.join(message.structure.namespaced_type.namespaced_name())
-message_name = message.structure.namespaced_type.name
 
 # Common Windows macros that may interfere with user defined constants
 msvc_common_macros = ('DELETE', 'ERROR', 'NO_ERROR')

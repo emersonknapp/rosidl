@@ -11,7 +11,7 @@ TEMPLATE(
     'msg__struct.hpp.em',
     package_name=package_name, interface_path=interface_path,
     message=service.request_message, include_directives=include_directives,
-    type_hash=type_hash['request_message'], type_description=type_description)
+    type_hash=type_hash['request_message'])
 }@
 
 @{
@@ -19,7 +19,7 @@ TEMPLATE(
     'msg__struct.hpp.em',
     package_name=package_name, interface_path=interface_path,
     message=service.response_message, include_directives=include_directives,
-    type_hash=type_hash['response_message'], type_description=type_description)
+    type_hash=type_hash['response_message'])
 }@
 
 @{
@@ -27,7 +27,7 @@ TEMPLATE(
     'msg__struct.hpp.em',
     package_name=package_name, interface_path=interface_path,
     message=service.event_message, include_directives=include_directives,
-    type_hash=type_hash['event_message'], type_description=type_description)
+    type_hash=type_hash['event_message'])
 }@
 
 @[for ns in service.namespaced_type.namespaces]@
