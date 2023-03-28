@@ -1,4 +1,5 @@
 #!/bin/bash
+# TEST: touching something unprotected
 set -euxo pipefail
 
 # Description:
