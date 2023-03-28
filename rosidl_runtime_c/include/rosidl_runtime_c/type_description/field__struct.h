@@ -1,4 +1,5 @@
 // DO NOT EDIT MANUALLY - this copied file managed by copy_type_description_generated_sources.bash
+// NOTE: I've changed this manually mwahahahah
 // generated from rosidl_generator_c/resource/idl__struct.h.em
 // with input from type_description_interfaces:msg/Field.idl
 // generated code does not contain a copyright notice
