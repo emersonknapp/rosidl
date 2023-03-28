@@ -1,3 +1,4 @@
+# Evil manual edit
 # DO NOT EDIT MANUALLY - managed by scripts/copy_type_description_generated_sources.bash
 # INTENTIONALLY CHANGING THIS FILE OUTSIDE THE SCRIPT WILL RESULT IN UNDEFINED BEHAVIOR FOR ALL OF ROS 2 CORE
 SHA256 (rosidl_generator_c/type_description_interfaces/msg/detail/field__struct.h) = 8e8d4bda083418457e6672f48d9b40ba6d5874bb6e45b01d1ccbf4b6c00754f6
