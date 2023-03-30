@@ -70,6 +70,7 @@ def generate_files(
 
     for idl_tuple in args.get('idl_tuples', []):
         idl_parts = idl_tuple.rsplit(':', 1)
+        idl_abs_base = idl_parts[0]  # TODO(ek)
         assert len(idl_parts) == 2
         locator = IdlLocator(*idl_parts)
         idl_rel_path = pathlib.Path(idl_parts[1])
@@ -93,6 +94,7 @@ def generate_files(
                 data = {
                     'package_name': args['package_name'],
                     'interface_path': idl_rel_path,
+                    'package_interface_dir': idl_abs_base,
                     'content': idl_file.content,
                     'type_description_info': type_description_info,
                 }

@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from pathlib import Path
+
 from rosidl_generator_type_description import parse_rihs_string
 from rosidl_generator_type_description import RIHS01_HASH_VALUE_SIZE
 from rosidl_parser.definition import AbstractGenericString
@@ -242,3 +244,21 @@ def type_hash_to_c_definition(hash_string, *, indent=2):
     result += ' ' * indent
     result += '}}'
     return result
+
+
+def scrape_type_raw_source(type_description_msg, idl_abs_base, idl_rel_path):
+    file_path = Path(idl_abs_base) / idl_rel_path
+    with open(file_path, 'r') as f:
+        idl_contents = f.read()
+    matcher = r'with input from (.+/.+/.+)'
+    matches = matcher.match(idl_contents.lines[1])
+    if not matches:
+        return idl_contents
+        # TODO(ek) referenced types
+
+    ros_source = matches.get(1)
+    parts = ros_source.split('/')
+    pkg_install = Path(get_pkg_install_dir(parts[0]))
+    ros_source_path = pkg_install / ros_source
+    with open(ros_source_path, 'r') as f:
+        return f.read()
